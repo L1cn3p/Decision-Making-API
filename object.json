@@ -1,0 +1,29 @@
+{
+    "assets_list": {
+        "asset1": {
+            "type": "Fire Truck A",
+            "location": "A",
+            "quantity": "3"
+        },
+        "asset2": {
+            "type": "Fire Truck A",
+            "location": "B",
+            "quantity": "5"
+        }
+        
+    },
+    "situation_list": {
+        "location": "Doha",
+        "situation1": {
+            "type": "Chemical Fire",
+            "severity": "2",
+            "action": "Suppress"
+        },
+        "situation2": {
+            "type": "Chemical Fire",
+            "severity": "2",
+            "action": "Suppress"
+        }
+     
+    }
+}
