@@ -16,12 +16,16 @@
         {
             "type": "Chemical Fire",
             "severity": "2",
-            "action": "Suppress"
+            "action": "Suppress",
+            "location": "Doha",
+            "time_constraint": "10"
         },
         {
             "type": "Chemical Fire",
             "severity": "2",
-            "action": "Suppress"
+            "action": "Suppress",
+            "location": "Wakra",
+            "time_constraint": "10"
         }
      
     ]
