@@ -1,4 +1,5 @@
 import json
+import math
 
 
 ASSETS = [
@@ -13,7 +14,7 @@ ASSETS = [
 
 class Asset:
 
-    def __init__(self, name: str, speed: float, capability: list, prep_time: float, effectiveness: list, location ):
+    def __init__(self, name: str, speed: float, capability: list, prep_time: float, effectiveness: list, location: tuple ):
         self.name = name
         self.speed = speed
         self.capability = capability
@@ -144,6 +145,53 @@ class ProblemFactory:
             self.problem_list.append(problem)
 
         return self.problem_list
+
+"""
+The API takes the users assets and problems as inputs - the algorithm generates 
+a list of length = len(asset_dict.keys())
+the class iterate through the problems and assign each problem to an asset if it meets
+the required criteria
+it will output some kind of response object with all the problems and their assigned assets
+the time it will take for the asset to reach the problem
+and a list of the remaining unsolved problems - if any
+"""
+class AssetAllocator:
+    def __init__(self, asset_dict, problem_list):
+        self.assets = asset_dict
+        self.problems = problem_list
+
+    # This method calculates the total distance between the location of the asset and
+    # the location of the problem by comparing the coordinates
+    def calculate_distance(self,asset,problem):
+        x1 = asset.location[0]
+        y1 = asset.location[1]
+        x2 = problem.location[0]
+        y2 = problem.location[1]
+        dist = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+        return dist
+
+    # Checks if the asset has the intended capability - returns a boolean
+    def check_response_validity(self,asset,problem):
+        capability = asset.capability
+        intent = problem.action
+        return intent in capability
+
+    # Calculates the total time it takes for each asset to reach its target (in minutes)
+    def check_response_time(self,asset, problem):
+        distance = self.calculate_distance(asset, problem)
+        speed = asset.speed
+        preparation_time = asset.prep_time
+        response_time = (distance / speed*60) + preparation_time
+        return response_time
+
+    # Checks the efficiency of the response, gives penalty for redundant assets sent
+    # after assigning each problem an asset, use the remaining unused assets to
+    # add an efficiency penalty
+    def check_response_efficiency(self,response, problem):
+        pass
+
+
+
     
 
 if __name__ == "__main__":

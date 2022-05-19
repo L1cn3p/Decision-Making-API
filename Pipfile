@@ -7,7 +7,9 @@ name = "pypi"
 fastapi = "*"
 uvicorn = "*"
 pydantic = "*"
-deap = {extras = ["all"], version = "*"}
+deap = "*"
+numpy = "*"
+seaborn = "*"
 
 [dev-packages]
 
