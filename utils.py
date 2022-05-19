@@ -112,10 +112,6 @@ class AssetFactory:
         return self.asset_dict
 
 
-# TODO create a situation builder,
-# the situation builder should return a list of problem objects that
-# the algorithm has to solve squentially.
-
 """
 To create a problem scenario: first create an instance of Problem factory.
 call create_problem_list with arg situation_list: a list of json objects.
