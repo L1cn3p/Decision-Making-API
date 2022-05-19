@@ -10,4 +10,12 @@ Robbery
 Breakin
 Traffic Accident
 Traffic Control
+
+action types:
+
+Investigate
+Suppress
+Control
+Evacuate
+Arrest
 """
