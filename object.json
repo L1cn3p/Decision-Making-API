@@ -1,12 +1,12 @@
 {
     "assets_list": [
         {
-            "type": "Fire Truck A",
+            "type": "Fire Engine A",
             "location": "A",
             "quantity": "3"
         },
         {
-            "type": "Fire Truck A",
+            "type": "Fire Engine A",
             "location": "B",
             "quantity": "5"
         }
@@ -17,14 +17,16 @@
             "type": "Chemical Fire",
             "severity": "2",
             "action": "Suppress",
-            "location": "Doha",
+            "distance_from_A": "10",
+            "distance_from_B": "15",
             "time_constraint": "10"
         },
         {
             "type": "Chemical Fire",
             "severity": "2",
             "action": "Suppress",
-            "location": "Wakra",
+            "distance_from_A": "20",
+            "distance_from_B": "13",
             "time_constraint": "10"
         }
      
