@@ -116,6 +116,16 @@ class AssetFactory:
 # the situation builder should return a list of problem objects that
 # the algorithm has to solve squentially.
 
+"""
+To create a problem scenario: first create an instance of Problem factory.
+call create_problem_list with arg situation_list: a list of json objects.
+See object.json for an example of the json object structure.
+The method returns a list of Problem objects
+
+problem_factory = ProblemFactory()
+problem_list = problem_factory.create_problem_list(situation_list)
+"""
+
 class Problem:
     def __init__(self, name, severity, action, location, time_constraint):
         self.name = name
@@ -125,7 +135,7 @@ class Problem:
         self.time_constraint = time_constraint
 
 class ProblemFactory:
-
+    
     def create_problem_list(self,situation_list):
         self.problem_list = []
         for problem in situation_list:
