@@ -17,16 +17,14 @@
             "type": "Chemical Fire",
             "severity": "2",
             "action": "Suppress",
-            "distance_from_A": "10",
-            "distance_from_B": "15",
+            "location": "10",
             "time_constraint": "10"
         },
         {
             "type": "Chemical Fire",
             "severity": "2",
             "action": "Suppress",
-            "distance_from_A": "20",
-            "distance_from_B": "13",
+            "location": "20",
             "time_constraint": "10"
         }
      
