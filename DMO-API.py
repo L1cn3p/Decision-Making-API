@@ -1,4 +1,5 @@
-from utils import *
+# from utils import *
+from DMO import *
 from fastapi import FastAPI, Request
 
 
@@ -12,7 +13,6 @@ app = FastAPI()
 
 @app.post("/DMO")
 async def submit(request: Request):
-    # return {str(assets_list) : str(situation_list)}
     data = await request.json()
     
     assets_list = data["assets_list"]

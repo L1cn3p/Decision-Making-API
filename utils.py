@@ -91,21 +91,20 @@ class AssetFactory:
             location = asset["location"]
             quantity = int(asset["quantity"])
 
-            match _type:
-                case "Fire Engine A":
-                    self._MakeFireEngineA(location=location, quantity=quantity)
-                case "Fire Engine B":
-                    self._MakeFireEngineB(location=location, quantity=quantity)
-                case "Fire Fast Response":
-                    self._MakeFireFastResponse(location=location, quantity=quantity)
-                case "Ambulance":
-                    self._MakeAmbulance(location=location, quantity=quantity)
-                case "Medical Fast Response":
-                    self._MakeMedicalFastResponse(location=location, quantity=quantity)
-                case "Police Patrol Car":
-                    self._MakePolicePatrolCar(location=location, quantity=quantity)
-                case "Traffic Police Bike":
-                    self._MakeTrafficPoliceBike(location=location, quantity=quantity)
+            if _type ==  "Fire Engine A":
+                self._MakeFireEngineA(location=location, quantity=quantity)
+            elif _type ==  "Fire Engine B":
+                self._MakeFireEngineB(location=location, quantity=quantity)
+            elif _type ==  "Fire Fast Response":
+                self._MakeFireFastResponse(location=location, quantity=quantity)
+            elif _type ==  "Ambulance":
+                self._MakeAmbulance(location=location, quantity=quantity)
+            elif _type ==  "Medical Fast Response":
+                self._MakeMedicalFastResponse(location=location, quantity=quantity)
+            elif _type ==  "Police Patrol Car":
+                self._MakePolicePatrolCar(location=location, quantity=quantity)
+            elif _type ==  "Traffic Police Bike":
+                self._MakeTrafficPoliceBike(location=location, quantity=quantity)
 
         for i, asset in enumerate(self.asset_list):
             self.asset_dict[i] = asset
