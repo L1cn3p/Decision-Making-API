@@ -2,30 +2,30 @@
     "assets_list": [
         {
             "type": "Fire Engine A",
-            "location": "A",
-            "quantity": "3"
+            "location": "Doha",
+            "quantity": 3
         },
         {
             "type": "Fire Engine A",
-            "location": "B",
-            "quantity": "5"
+            "location": "Wakra",
+            "quantity": 5
         }
         
     ],
     "situation_list": [
         {
             "type": "Chemical Fire",
-            "severity": "2",
+            "severity": 2,
             "action": "Suppress",
-            "location": "10",
-            "time_constraint": "10"
+            "location": "Khor",
+            "time_constraint": 10
         },
         {
             "type": "Chemical Fire",
-            "severity": "2",
+            "severity": 2,
             "action": "Suppress",
-            "location": "20",
-            "time_constraint": "10"
+            "location": "India",
+            "time_constraint": 10
         }
      
     ]
