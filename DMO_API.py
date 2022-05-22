@@ -5,9 +5,10 @@ from fastapi import FastAPI, Request
 
 
 """
-This API will reveive an json request (see object.json for example)
+This API will reveive a json request (see object.json for example)
 and will send this request to be procossed by the alogrithm.
-It should respond with a json object of the appropriate response to each situation
+It should respond with suggestion list containing which assets should be deployed,
+and from which location.
 """
 
 app = FastAPI()
@@ -31,8 +32,8 @@ async def submit(request: Request):
     response = []
     for i, val in enumerate(best_individual):
         if val != 0:
-            print(f'deploy {asset_dict[i].name} at: {asset_dict[i].location} \n')
-            response.append(f'deploy {asset_dict[i].name} at: {asset_dict[i].location}')
-    return {"message": response}
+            print(f'deploy {asset_dict[i].name} from: {asset_dict[i].location} \n')
+            response.append(f'deploy {asset_dict[i].name} from: {asset_dict[i].location}')
+    return {"Suggestion": response}
 
 
