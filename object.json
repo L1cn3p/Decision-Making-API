@@ -2,30 +2,75 @@
     "assets_list": [
         {
             "type": "Fire Engine A",
-            "location": "Doha",
+            "location": [1,3],
             "quantity": 3
         },
         {
             "type": "Fire Engine A",
-            "location": "Wakra",
+            "location": [1,3],
+            "quantity": 3
+        },
+        {
+            "type": "Fire Engine A",
+            "location": [1,3],
+            "quantity": 3
+        },
+        {
+            "type": "Fire Engine A",
+            "location": [1,3],
+            "quantity": 3
+        },
+        {
+            "type": "Fire Engine A",
+            "location": [1,3],
+            "quantity": 3
+        },
+        {
+            "type": "Fire Engine A",
+            "location": [1,3],
+            "quantity": 3
+        },
+        {
+            "type": "Fire Engine A",
+            "location": [1,3],
+            "quantity": 3
+        },
+        {
+            "type": "Fire Engine A",
+            "location": [1,3],
+            "quantity": 3
+        },
+        {
+            "type": "Fire Engine A",
+            "location": [1,3],
+            "quantity": 3
+        },
+        {
+            "type": "Fire Engine A",
+            "location": [1,3],
+            "quantity": 3
+        },
+        {
+            "type": "Fire Engine A",
+            "location": [1,5],
             "quantity": 5
         }
         
     ],
     "situation_list": [
         {
-            "type": "Chemical Fire",
+            "type": "Chemical",
             "severity": 2,
-            "action": "Suppress",
-            "location": "Khor",
-            "time_constraint": 10
+            "action": "Supress",
+            "location": [2,7],
+            "time_constraint": 60
         },
         {
-            "type": "Chemical Fire",
+            "type": "Oil",
             "severity": 2,
-            "action": "Suppress",
-            "location": "India",
-            "time_constraint": 10
+            "action": "Supress",
+            "location": [3,9],
+            "time_constraint": 50
         }
      
     ]
