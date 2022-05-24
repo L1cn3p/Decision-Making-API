@@ -176,58 +176,42 @@ def check_response_efficiency(response):
     return sum(response)
 
 # checks if the response meets the time constraint
-def check_response_time(response,problem_list):
+def check_response_time(assigned_assets):
     time_violation = 0
-    resp = response.copy()
-    for problem in problem_list:
-        prob_type = problem.name
-        action = problem.action
-        max_time = problem.time_constraint
-        for n,asset in enumerate(resp):
-            if asset != 0:
-                if (asset_dict[n].capability.count(prob_type)) and (asset_dict[n].effectiveness.count(action)):
-                    resp[n] = 0
-                    time = calculate_time(asset_dict[n], problem)
-                    if time > max_time:
-                        time_violation += 1
-    return time_violation
-
-# calculates the total time each asset will take to reach its destination
-# this allows us to favor faster responses
-def total_t(response,problem_list):
+    # total time allows us to favor faster responses
     total_time = 0
-    resp = response.copy()
-    for problem in problem_list:
-        prob_type = problem.name
-        action = problem.action
-        for n,asset in enumerate(resp):
-            if asset != 0:
-                if (asset_dict[n].capability.count(prob_type)) and (asset_dict[n].effectiveness.count(action)):
-                    resp[n] = 0
-                    time = calculate_time(asset_dict[n], problem)
-                    total_time += time
-        return total_time
+    for (asset, problem) in assigned_assets:
+        time = calculate_time(asset, problem)
+        total_time += time
+        time_cons = problem.time_constraint
+        print(f"time for {asset.name} at {asset.location} to reach {problem.name} with limit {time_cons} at location {problem.location} = {time}")
+        if time > time_cons:
+            time_violation += time - time_cons
+            # this way the violation is proportional to how late the response is
+    return time_violation, total_time
 
+# adding a multiplier to validity violations to signify their importabnce
+VALIDITY_VIOLATION_MULTIPLIER = 10
 # checks if the response meets requirements for the actions we want to be performed on the problem
 def check_response_validity(response,problem_list):
-    validity_violation = 0
     resp = response.copy()
+    assigned_assets = []
+    n_correct_responses = 0
+    response_magnitude = 0
     for problem in problem_list:
         prob_type = problem.name
         action = problem.action
-        response_magnitude = problem.severity
-        n_correct_responses = 0
-        for n,asset in enumerate(resp):
-            if asset != 0:
-                if (asset_dict[n].capability.count(prob_type)) and (asset_dict[n].effectiveness.count(action)):
-                    n_correct_responses += 1
-                    resp[n] = 0
-                else:
-                    continue
-        if n_correct_responses < response_magnitude:
-            for _ in range(response_magnitude-n_correct_responses):
-                validity_violation += 1
-    return validity_violation
+        response_magnitude += problem.severity
+        for _ in range(problem.severity):
+            for n,asset in enumerate(resp):
+                if asset != 0:
+                    if (asset_dict[n].capability.count(prob_type)) and (asset_dict[n].effectiveness.count(action)):
+                        n_correct_responses += 1
+                        assigned_assets.append((asset_dict[n], problem))
+                        resp[n] = 0
+                        break
+    validity_violation = (response_magnitude-n_correct_responses) * VALIDITY_VIOLATION_MULTIPLIER
+    return validity_violation, assigned_assets
 
 HARD_CONSTRAINT_PENALTY = 2
 # Penalty multiplier for the hard constraints in getCost method
@@ -241,8 +225,8 @@ def getCost(response, problem_list):
     """
 
     # count the various violations:
-    validity_violations = check_response_validity(response, problem_list)
-    time_violations = check_response_time(response, problem_list)
+    validity_violations, assigned_assets = check_response_validity(response, problem_list)
+    time_violations, total_time = check_response_time(assigned_assets)
     efficiency_violations = check_response_efficiency(response)
     # print(f"Validity violations: {validity_violations}")
     # print(f"time violations: {time_violations}")
@@ -252,26 +236,6 @@ def getCost(response, problem_list):
     hardContstraintViolations = validity_violations + time_violations
     softContstraintViolations = efficiency_violations
 
-    total_time = total_t(response, problem_list)
-
     return HARD_CONSTRAINT_PENALTY * hardContstraintViolations + softContstraintViolations, total_time
 
-# if __name__ == "__main__":
-#     with open('object.json', 'r') as f:
-#         data = json.load(f)
-#     assets_list = data["assets_list"]
-#     situation_list = data["situation_list"]
-
-#     asset_factory = AssetFactory()
-#     problem_factory = ProblemFactory()
-#     global asset_dict
-#     asset_dict = asset_factory.create_asset_dict(assets_list)
-#     problem_list = problem_factory.create_problem_list(situation_list)
-#     print(vars(asset_dict[0]))
-#     print(vars(problem_list[0]))
-#     import DMO
-    
-#     DMO.asset_dict = asset_dict
-#     DMO.problem_list = problem_list
-#     best_individual = DMO.make_decision(asset_dict, problem_list)
 

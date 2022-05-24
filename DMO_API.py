@@ -27,13 +27,13 @@ async def submit(request: Request):
     DMO.asset_dict = asset_dict
     DMO.problem_list = problem_list
     best_individual = DMO.make_decision(asset_dict, problem_list)
-    print(asset_dict[0].name)
-    print(problem_list)
     response = []
-    for i, val in enumerate(best_individual):
-        if val != 0:
-            print(f'deploy {asset_dict[i].name} from: {asset_dict[i].location} \n')
-            response.append(f'deploy {asset_dict[i].name} from: {asset_dict[i].location}')
-    return {"Suggestion": response}
+    __ , assigned_assets = utils.check_response_validity(best_individual, problem_list)
+    for (asset, problem) in assigned_assets:
+        time = utils.calculate_time(asset, problem)
+        line = f"Deploy {asset.name} from {asset.location} to {problem.name} at {problem.location} - (est. duration: {round(time)} minutes)"
+        print(line + "\n")
+        response.append(line)
+    return {"Response": response}
 
 
